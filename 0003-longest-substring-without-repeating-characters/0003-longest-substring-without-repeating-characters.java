@@ -9,7 +9,7 @@ class Solution {
             m.put(s.charAt(j), m.getOrDefault(s.charAt(j), 0) + 1); 
             
             if(m.size() == j - i + 1) {
-                maxi = Math.max(maxi, m.size());
+                maxi = Math.max(maxi,  j - i + 1);
                 j++;
             } else if(m.size() < j - i + 1) {
                 while(m.size() < j - i + 1) {
