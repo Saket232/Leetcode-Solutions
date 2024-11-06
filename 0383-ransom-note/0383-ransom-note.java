@@ -1,24 +1,23 @@
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
-        Map<Character, Integer> m1 = new HashMap<>();
-        for(int i = 0; i < ransomNote.length(); i++) {
-            m1.put(ransomNote.charAt(i), m1.getOrDefault(ransomNote.charAt(i), 0) + 1);
+        Map<Character, Integer> magazineMap = new HashMap<>();
+
+        // Count each character in the magazine
+        for (int i = 0; i < magazine.length(); i++) {
+            char c = magazine.charAt(i);
+            magazineMap.put(c, magazineMap.getOrDefault(c, 0) + 1);
         }
 
-        Map<Character, Integer> m2 = new HashMap<>();
-        for(int i = 0; i < magazine.length(); i++) {
-            m2.put(magazine.charAt(i), m2.getOrDefault(magazine.charAt(i), 0) + 1);
-        }
-
-        for(Character c : m1.keySet()) {
-            if (!m2.containsKey(c) || m2.get(c) == 0) {
+        // Check if magazineMap has enough of each character for ransomNote
+        for (int i = 0; i < ransomNote.length(); i++) {
+            char c = ransomNote.charAt(i);
+            if (!magazineMap.containsKey(c) || magazineMap.get(c) == 0) {
                 return false; // Not enough characters in the magazine
             }
-            
-            if(!(m2.get(c) >= m1.get(c))) {
-                return false;
-            }
+            // Decrement the count in magazineMap
+            magazineMap.put(c, magazineMap.get(c) - 1);
         }
-        return true;
+
+        return true; // Successfully found all characters needed
     }
 }
