@@ -1,0 +1,1 @@
+You should check if m2 (magazine) contains enough characters to match those required by m1 (ransom note),
