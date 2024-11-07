@@ -1,26 +1,30 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        Map<Character, Character> stMap = new HashMap<>();
-        Map<Character, Character> tsMap = new HashMap<>();
-        int len = s.length();
-        
-        for(int i = 0; i < len; i++) {
-            // check if the char already has mapping and if yes, mapping is same as previous one
-            char schar = s.charAt(i);
-            char tchar = t.charAt(i);
-                
-            
-            if(stMap.containsKey(schar) && stMap.get(schar) != tchar) {
-                return false;
-            }
-            
-            if(tsMap.containsKey(tchar) && tsMap.get(tchar) != schar) {
-                return false;
-            }
-            
-            stMap.put(s.charAt(i), t.charAt(i));
-            tsMap.put(t.charAt(i), s.charAt(i));
+        if (s.length() != t.length()) {
+            return false;
         }
+
+        Map<Character, Character> mapST = new HashMap<>();
+        Map<Character, Character> mapTS = new HashMap<>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            char charS = s.charAt(i);
+            char charT = t.charAt(i);
+
+            // Check if there's an inconsistent mapping for `s -> t`
+            if (mapST.containsKey(charS) && mapST.get(charS) != charT) {
+                return false;
+            }
+            // Check if there's an inconsistent mapping for `t -> s`
+            if (mapTS.containsKey(charT) && mapTS.get(charT) != charS) {
+                return false;
+            }
+
+            // Create the mapping from `s -> t` and `t -> s`
+            mapST.put(charS, charT);
+            mapTS.put(charT, charS);
+        }
+        
         return true;
     }
 }
