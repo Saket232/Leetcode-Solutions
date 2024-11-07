@@ -1,24 +1,19 @@
-import java.util.Collection;
+import java.util.*;
+
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        Map<String, List<String>> map= new HashMap<>();
-        for(String s: strs) {
-            char tempArray[] = s.toCharArray();
+        Map<String, List<String>> map = new HashMap<>();
+        
+        for (String s : strs) {
+            char[] tempArray = s.toCharArray();
             Arrays.sort(tempArray);
-            String tempStr = new String(tempArray);
-            if(map.containsKey(tempStr)) {
-                List<String> l = map.get(tempStr);
-                l.add(s);
-                map.put(tempStr, l);
-            } else {
-                List<String> l = new ArrayList<>();
-                l.add(s);
-                map.put(tempStr, l);
-            }
+            String sortedStr = new String(tempArray);
+
+            // Use computeIfAbsent to simplify the insertion
+            // This method takes a key and a function. If the key (sortedStr) does not already exist in the map, it creates a new entry for that key with the result of the function (k -> new ArrayList<>()).
+            map.computeIfAbsent(sortedStr, k -> new ArrayList<>()).add(s);
         }
         
-        Collection<List<String>> values = map.values();
-        return new ArrayList<>(values);
-        
+        return new ArrayList<>(map.values());
     }
 }
