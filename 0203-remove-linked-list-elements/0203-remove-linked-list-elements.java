@@ -10,29 +10,20 @@
  */
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
-        if(head == null) {
-            return head;
-        }
-        
-        ListNode temp = head, prev = null;
+        ListNode dummy = new ListNode(0); // Dummy node
+        dummy.next = head;
+        ListNode current = head; // create a temp pointer
+        ListNode prev = dummy;
 
-        while(temp != null && temp.val == val){
-            temp = temp.next;
-            head = temp;
-        }
-        
-        while(temp != null && temp.next != null) {
-            if(temp.val == val) {
-                prev.next = temp.next;
+        while (current != null) {
+            if (current.val == val) {
+                prev.next = current.next; // Skip the current node
             } else {
-                prev = temp;
+                prev = current; // Move prev only if current is not deleted
             }
-            temp = temp.next;
+            current = current.next; // Move to the next node
         }
         
-        if(temp != null && temp.next == null && temp.val == val) {
-            prev.next = null;
-        }
-        return head;
+        return dummy.next; // Return head from dummy.next
     }
 }
