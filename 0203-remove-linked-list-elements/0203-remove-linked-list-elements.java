@@ -14,7 +14,7 @@ class Solution {
             return head;
         }
         
-        ListNode temp = head, prev = temp;
+        ListNode temp = head, prev = null;
 
         while(temp != null && temp.val == val){
             temp = temp.next;
@@ -23,7 +23,6 @@ class Solution {
         
         while(temp != null && temp.next != null) {
             if(temp.val == val) {
-                System.out.println(prev.val);
                 prev.next = temp.next;
             } else {
                 prev = temp;
