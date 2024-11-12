@@ -4,6 +4,8 @@
 4.  **Move slow and fast simultaneously**: Now move fast to the end while moving slow along with it. This will position slow just before the node to be removed.
 5.  **Remove the Node**: Skip over the target node by setting slow.next = slow.next.next.
 ​
+
+
 **Why need the Moving the fast pointer n steps ahead?**
 * By moving fast n steps ahead, we create a gap of n nodes between fast and slow.
 * This gap allows fast to reach the end of the list while slow is exactly n nodes behind fast, which is also n nodes from the end.
